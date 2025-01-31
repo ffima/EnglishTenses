@@ -21,7 +21,7 @@ root.geometry(f'{window_width}x{window_height}+{center_x}+{center_y}')
 # home page
 
 frame = ttk.Frame(root)
-frame.pack(expand=True, fill="both", padx=20, pady=20)
+frame.pack(expand=True, fill="both", padx=10, pady=10)
 tenses = [
     ["I speak English", "I am speaking English", "I have spoken English", "I have been speaking English"],
     ["I spoke English", "I was speaking English", "I had spoken English", "I had been speaking English"],
@@ -33,25 +33,28 @@ column_headers = ["Simple", "Continuous", "Perfect", "Perfect Continuous"]
 row_headers = ["Present", "Past", "Future"]
 
 for j, header in enumerate(column_headers):
-    label = ttk.Label(frame, text=header, font="Calibri 14 bold", anchor="center")
+    label = ttk.Label(frame, text=header, font="Calibri 18 bold", anchor="center")
     label.grid(row=0, column=j + 1, padx=5, pady=5, sticky="nsew")
 
 for i, header in enumerate(row_headers):
-    label = ttk.Label(frame, text=header, font="Calibri 14 bold", anchor="center")
+    label = ttk.Label(frame, text=header, font="Calibri 18 bold", anchor="center")
     label.grid(row=i + 1, column=0, padx=5, pady=5, sticky="nsew")
 
 # tenses buttons
+style = ttk.Style()
+style.configure("TButton", font=("Calibri", 18))
+
 for i, row in enumerate(tenses):
     for j, tense in enumerate(row):
-        button = ttk.Button(frame, text=tense, command=lambda t=tense: open_tense_tab(t))
+        button = ttk.Button(frame, text=tense, style = "TButton", command=lambda t=tense: open_tense_tab(t))
         button.grid(row=i + 1, column=j + 1, padx=5, pady=5, sticky="nsew")
 
 # grid config
-for i in range(len(tenses) + 1):
-    frame.grid_rowconfigure(i, weight= 1, uniform="row", minsize=100) #need help!!
+for i in range(1, len(tenses) + 1):
+    frame.grid_rowconfigure(i, weight= 1, uniform="row", minsize=80) #need help!!
 
-for j in range(len(tenses[0]) + 1):
-    frame.grid_columnconfigure(j, weight= 0, uniform="column", minsize=100) #need help!!
+for j in range(1, len(tenses[0]) + 1):
+    frame.grid_columnconfigure(j, weight= 1, uniform="column", minsize=80) #need help!!
 
 # tense tab
 def open_tense_tab(tense):
