@@ -1,6 +1,8 @@
 import tkinter as tk
 # from tkinter import ttk
 import ttkbootstrap as ttk
+from style import configure_button_style
+
 
 root = ttk.Window(themename= "flatly")
 root.title('English Tenses')
@@ -17,6 +19,9 @@ center_x = int(screen_width/2 - window_width / 2)
 center_y = int(screen_height/2 - window_height / 2)
 
 root.geometry(f'{window_width}x{window_height}+{center_x}+{center_y}')
+
+# Список имен стилей, индексация соответствует индексации в tenses
+tensesStyle = ["Present.TButton", "Past.TButton", "Future.TButton"]
 
 # home page
 
@@ -44,9 +49,13 @@ for i, header in enumerate(row_headers):
 style = ttk.Style()
 style.configure("TButton", font=("Calibri", 18))
 
+# конфигурируем стили
+configure_button_style()
+
 for i, row in enumerate(tenses):
     for j, tense in enumerate(row):
-        button = ttk.Button(frame, text=tense, style = "TButton", command=lambda t=tense: open_tense_tab(t))
+        # в style подставляем соответствующее название стиля
+        button = ttk.Button(frame, text=tense, style=tensesStyle[i], command=lambda t=tense: open_tense_tab(t))
         button.grid(row=i + 1, column=j + 1, padx=5, pady=5, sticky="nsew")
 
 # grid config
